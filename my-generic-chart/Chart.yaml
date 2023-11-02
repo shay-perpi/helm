@@ -1,0 +1,4 @@
+apiVersion: v2
+name: hello-world
+description: A Helm chart for deploying an application with a PVC in OpenShift
+version: 0.1.0
