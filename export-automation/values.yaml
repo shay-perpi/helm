@@ -1,0 +1,41 @@
+environment: raster-qa
+
+pvc:
+  name: local-sources-pvc
+
+containerPort: 8080
+service:
+  name: my-service
+  port: 80
+  type: LoadBalancer  # or NodePort
+  targetPort: 5000
+
+envVariables:
+  logger_path: "logs/"
+  export_config: 'scadolar_config.json'
+
+cloudProvider: azure
+pullSecretName: "acr-registry"
+
+image:
+  repository: acrarolibotnonprod.azurecr.io/automation/export-backup
+  tag: v2
+
+replicaCount: 1
+subPathVolume: export/
+serviceAccount:
+  create: true
+  name: my-service-account-name
+
+ingress:
+  enabled: true
+  host: ""  # Set your desired host
+  path: /
+  annotations: {}
+
+route:
+  enabled: true
+  annotations: {}
+  
+autoscaling:
+  enabled: false
